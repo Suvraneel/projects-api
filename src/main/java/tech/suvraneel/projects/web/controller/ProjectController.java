@@ -35,4 +35,16 @@ public class ProjectController {
         URI uri = uriComponentsBuilder.path("/projects/{requestedId}").buildAndExpand(projectBean.getProjectId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(path = "/{requestedId}")
+    public ResponseEntity<ProjectBean> updateProject(@PathVariable("requestedId") String projectId, @RequestBody ProjectBean projectBean) {
+        projectBean = projectService.updateProjectById(projectId, projectBean);
+        return projectBean!=null?ResponseEntity.noContent().build():ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(path = "/{requestedId}")
+    public ResponseEntity<Void> deleteProject(@PathVariable("requestedId") String projectId) {
+        ProjectBean projectBean = projectService.deleteProjectById(projectId);
+        return projectBean!=null?ResponseEntity.noContent().build():ResponseEntity.notFound().build();
+    }
 }

@@ -36,6 +36,23 @@ public class ProjectServiceImpl implements ProjectService {
         return projectEntity.map(this::convertProjectEntityToBean).orElse(null);
     }
 
+    public ProjectBean updateProjectById(String projectId, ProjectBean projectBean) {
+        Optional<ProjectEntity> projectEntity = projectDAO.findById(projectId);
+        if (projectEntity.isPresent()) {
+            ProjectEntity projectEntityUpdated = projectEntity.get();
+            BeanUtils.copyProperties(projectBean, projectEntityUpdated);
+            projectEntityUpdated = projectDAO.save(projectEntityUpdated);
+            return convertProjectEntityToBean(projectEntityUpdated);
+        }
+        return null;
+    }
+
+    public ProjectBean deleteProjectById(String projectId) {
+        Optional<ProjectEntity> projectEntity = projectDAO.findById(projectId);
+        projectEntity.ifPresent(projectDAO::delete);
+        return projectEntity.map(this::convertProjectEntityToBean).orElse(null);
+    }
+
     //     Utility Methods
     ProjectBean convertProjectEntityToBean(ProjectEntity projectEntity) {
         ProjectBean projectBean = new ProjectBean();

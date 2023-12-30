@@ -10,4 +10,8 @@ public interface ProjectService {
     List<ProjectBean> getAllProjects();
 
     ProjectBean getProjectById(String projectId);
+
+    ProjectBean updateProjectById(String projectId, ProjectBean projectBean);
+
+    ProjectBean deleteProjectById(String projectId);
 }
