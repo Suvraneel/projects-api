@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS | Suvraneel's Projects Repository</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+</head>
+<body>
+<h1>Projects</h1>
+<p>Here is a list of all the projects I have worked on.</p>
+<table>
+    <thead>
+    <tr>
+        <th>Project Name</th>
+        <th>Project Description</th>
+        <th>GitHub URL</th>
+        <th>Deployment URL</th>
+        <th>Technologies</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project : ${projects}">
+        <td th:text="${project.projectName}">Project Name</td>
+        <td th:text="${project.description}">Project Description</td>
+        <td><a th:href="${project.githubURL}" th:text="${project.githubURL}">GitHub URL</a></td>
+        <td><a th:href="${project.deploymentURL}" th:text="${project.deploymentURL}">Deployment URL</a></td>
+        <td>
+            <div class="technology-pills">
+                <span th:each="tech : ${project.techStack}" th:if="${!#strings.isEmpty(tech)}" class="pill" th:text="${tech}"></span>
+            </div>
+        </td>
+
+        <td>
+            <!-- An Edit button that links to the edit page for the specific project -->
+            <a th:href="@{/cms/projects/edit/{projectId}(projectId=${project.projectId})}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

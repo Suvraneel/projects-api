@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Project</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Edit Project</h1>
+<form th:action="@{'/cms/projects/edit/' + ${project.projectId}}" method="post" th:object="${project}">
+    <input type="hidden" name="id" th:value="${project.projectId}" th:field="*{projectId}"/>
+    <label for="projectName">Project Name:</label>
+    <input type="text" id="projectName" th:field="*{projectName}" />
+
+    <label for="description">Project Description:</label>
+    <input type="text" id="description" th:field="*{description}" />
+
+    <label for="githubURL">GitHub URL:</label>
+    <input type="text" id="githubURL" th:field="*{githubURL}" />
+
+    <label for="deploymentURL">Deployment URL:</label>
+    <input type="text" id="deploymentURL" th:field="*{deploymentURL}" />
+
+    <label for="techStack">Technologies (comma-separated):</label>
+    <input type="text" id="techStack" th:field="*{techStack}" />
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

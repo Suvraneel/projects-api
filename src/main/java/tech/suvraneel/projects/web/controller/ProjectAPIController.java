@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/projects")
-public class ProjectController {
+public class ProjectAPIController {
 
     @Autowired
     ProjectService projectService;
